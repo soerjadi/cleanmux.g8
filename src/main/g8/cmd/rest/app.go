@@ -6,6 +6,8 @@ import (
 	"main/internal/config"
 	"main/internal/delivery/rest"
 	helloHandler "main/internal/delivery/rest/helloworld"
+	"main/internal/pkg/log"
+	"main/internal/pkg/log/logger"
 	"net/http"
 	"os"
 	"os/signal"
@@ -19,9 +21,14 @@ import (
 func main() {
 	cfg, err := config.Init()
 	if err != nil {
-		fmt.Printf("[Config] error reading config from file. err = %v", err)
+		log.Errorw("[Config] error reading config from file.", logger.KV{
+			"err": err,
+		})
 		return
 	}
+
+	// initiate log
+	log.InitLog(cfg.Server.LogPath, cfg.Server.Name)
 
 	// open database connection
 	dataSource := fmt.Sprintf("user=%s password=%s	host=%s port=%s dbname=%s sslmode=disable",
@@ -34,13 +41,17 @@ func main() {
 
 	db, err := sqlx.Open(cfg.Database.Driver, dataSource)
 	if err != nil {
-		fmt.Printf("cannot connect to db. err = %v", err)
+		log.Errorw("[Database] cannot connect to db.", logger.KV{
+			"err": err,
+		})
 		return
 	}
 
 	handlers, err := initiateHandler(cfg, db)
 	if err != nil {
-		fmt.Printf("unable to initiate handler. err = %v", err)
+		log.Errorw("[Handlers] unable to initiate handler.", logger.KV{
+			"err": err,
+		})
 		return
 	}
 
@@ -55,12 +66,14 @@ func main() {
 		Handler:      r, // Pass our instance of gorilla/mux in.
 	}
 
-	fmt.Printf("Server running in port : %s", cfg.Server.Port)
+	log.Infof("Server running in port : %s", cfg.Server.Port)
 
 	// Run our server in a goroutine so that it doesn't block.
 	go func() {
 		if err := srv.ListenAndServe(); err != nil {
-			fmt.Errorf("error running apps. err = %v", err)
+			log.Errorw("error running apps.", logger.KV{
+				"err": err,
+			})
 		}
 	}()
 
@@ -81,7 +94,7 @@ func main() {
 	// Optionally, you could run srv.Shutdown in a goroutine and block on
 	// <-ctx.Done() if your application should wait for other services
 	// to finalize based on context cancellation.
-	fmt.Println("shutting down")
+	log.Info("shutting down")
 	os.Exit(0)
 }
 

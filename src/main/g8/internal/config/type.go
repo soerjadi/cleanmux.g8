@@ -10,9 +10,11 @@ type Config struct {
 }
 
 type Server struct {
+	Name        string
 	Port        string
 	WaitTimeout int
 	BaseURL     string
+	LogPath     string
 }
 
 type DatabaseConfig struct {
