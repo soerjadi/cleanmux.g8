@@ -6,6 +6,8 @@ import (
 	"main/internal/config"
 	"main/internal/delivery/rest"
 	helloHandler "main/internal/delivery/rest/helloworld"
+
+	"main/internal/delivery/rest/middleware/jwt"
 	"main/internal/pkg/log"
 	"main/internal/pkg/log/logger"
 	"net/http"
@@ -100,7 +102,8 @@ func main() {
 
 func initiateHandler(cfg *config.Config, db *sqlx.DB) ([]rest.API, error) {
 
-	handler := helloHandler.NewHandler()
+	mid := jwt.OnlyLoggedInUser(cfg)
+	handler := helloHandler.NewHandler([]mux.MiddlewareFunc{mid})
 
 	return []rest.API{
 		handler,

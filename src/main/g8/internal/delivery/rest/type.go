@@ -8,6 +8,6 @@ type API interface {
 
 type Response struct {
 	Data    interface{} `json:"data"`
-	Message string      `json:"message"`
+	Message string      `json:"message,omitempty"`
 	Status  string      `json:"status"`
 }

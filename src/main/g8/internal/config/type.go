@@ -7,6 +7,7 @@ var cfg *Config
 type Config struct {
 	Server   Server
 	Database DatabaseConfig
+	Key      Key
 }
 
 type Server struct {
@@ -15,6 +16,10 @@ type Server struct {
 	WaitTimeout int
 	BaseURL     string
 	LogPath     string
+}
+
+type Key struct {
+	SecretToken string
 }
 
 type DatabaseConfig struct {
