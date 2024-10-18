@@ -8,10 +8,10 @@ import (
 	"strconv"
 	"strings"
 
-	"main/internal/config"
-	"main/internal/delivery/rest"
-	"main/internal/model/constant"
-	"main/internal/pkg/log"
+	"$module_name$/internal/config"
+	"$module_name$/internal/delivery/rest"
+	"$module_name$/internal/model/constant"
+	"$module_name$/internal/pkg/log"
 
 	"github.com/golang-jwt/jwt/v4"
 )

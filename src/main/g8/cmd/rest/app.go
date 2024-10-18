@@ -1,15 +1,15 @@
 package main
 
 import (
+	"$module_name$/internal/config"
+	"$module_name$/internal/delivery/rest"
+	helloHandler "$module_name$/internal/delivery/rest/helloworld"
 	"context"
 	"fmt"
-	"main/internal/config"
-	"main/internal/delivery/rest"
-	helloHandler "main/internal/delivery/rest/helloworld"
 
-	"main/internal/delivery/rest/middleware/jwt"
-	"main/internal/pkg/log"
-	"main/internal/pkg/log/logger"
+	"$module_name$/internal/delivery/rest/middleware/jwt"
+	"$module_name$/internal/pkg/log"
+	"$module_name$/internal/pkg/log/logger"
 	"net/http"
 	"os"
 	"os/signal"

@@ -1,7 +1,7 @@
 package helloworld
 
 import (
-	"main/internal/delivery/rest"
+	"$module_name$/internal/delivery/rest"
 	"net/http"
 
 	"github.com/gorilla/mux"

@@ -3,7 +3,7 @@ package config
 import (
 	"os"
 
-	"main/internal/pkg/util"
+	"$module_name$/internal/pkg/util"
 
 	"gopkg.in/gcfg.v1"
 )

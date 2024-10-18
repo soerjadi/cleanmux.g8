@@ -1,9 +1,9 @@
 package log
 
 import (
-	"main/internal/pkg/log/logger"
+	"$module_name$/internal/pkg/log/logger"
 
-	"main/internal/pkg/log/logger/zerolog"
+	"$module_name$/internal/pkg/log/logger/zerolog"
 )
 
 // Config of log

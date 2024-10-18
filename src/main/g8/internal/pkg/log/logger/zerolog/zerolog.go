@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"sync"
 
-	"main/internal/pkg/log/logger"
+	"$module_name$/internal/pkg/log/logger"
 
 	"github.com/rs/zerolog"
 )

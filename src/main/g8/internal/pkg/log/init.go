@@ -1,6 +1,6 @@
 package log
 
-import "main/internal/pkg/log/logger"
+import "$module_name$/internal/pkg/log/logger"
 
 func InitLog(pathFile, appName string) {
 	path := pathFile + appName
