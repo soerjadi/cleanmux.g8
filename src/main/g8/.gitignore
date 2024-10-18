@@ -6,6 +6,7 @@ vendor/
 .DS_STORE
 
 config.ini
+config-docker.ini
 coverage.out
 
 *.out
