@@ -14,8 +14,11 @@ func NewHandler(middleware []mux.MiddlewareFunc) rest.API {
 }
 
 func (h *Handler) RegisterRoutes(r *mux.Router) {
+	route := r.NewRoute().Name("hello.world").SubRouter()
+
+	route.HandleFunc("/hello", rest.HandlerFunc(h.hello).Serve).Methods(http.MethodGet)
+
 	if h.middleware != nil {
-		r.Use(h.middleware...)
+		route.Use(h.middleware...)
 	}
-	r.HandleFunc("/hello", rest.HandlerFunc(h.hello).Serve).Methods(http.MethodGet)
 }
